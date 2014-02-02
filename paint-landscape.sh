@@ -53,7 +53,7 @@ function stack {
 		
 		echo "mov @$res"
 		ffmpeg -f image2 -pattern_type glob -i "$tilepath/*.jpg" \
-		-r 25 -vcodec mpeg4 -b 30000k -vf \
+		-r 25 -vcodec mpeg4 -b 30000k \
 		-y $mov/setname-$res.mp4
 	done
 }
