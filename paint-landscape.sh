@@ -1,26 +1,18 @@
 #!/bin/bash
 
-assets="assets"
-url="$assets/url"	# url list
-result="$assets/result"
-
-
-mkdir -v $assets $result $url
-resolutions=("1280x960" "1920x1080")
-
-
-
-
-if [[ $# -eq 0 ]]
+if [[ $# -eq 0 ]] # check if a param is entered
 then
 	echo 'warning ! no url list'
 	exit 0
 fi
 
-urlpath=$1
-urlfile=$(basename $urlpath)
-setname="${urlfile%.*}"
+function initenvironement {
+	assets="assets"
+	url="$assets/url"
+	result="$assets/result"
 
+	mkdir -v $assets $result $url
+}
 function initproject {
 
 	setpath="$result/$setname"
@@ -45,26 +37,35 @@ function gettilesHD {
 		
 	done
 	tilesetsize="$(($x + 1))x$(($y + 1))"
-	echo "tilesetsize $tilesetsize"
+	printf "tiles: $i \t tilesetsize: $tilesetsize"
 }
 function tilemontage {
-	echo gm montage -monitor -geometry +0+0 -tile $tilesetsize "$raw/*.jpg" "$tmp/$setname.miff"
+	gm montage -monitor -geometry +0+0 -tile $tilesetsize "$raw/*.jpg" "$tmp/$setname.miff"
 }
 function stack {
 	for res in ${resolutions[@]} 
 	do
 		tilepath="$stk/tiles-$res"
 		mkdir $tilepath
+		
+		echo "tiles @$res"
 		gm convert "$tmp/$setname.miff" -crop $res +adjoin $tilepath/%05d.jpg
 		
+		echo "mov @$res"
 		ffmpeg -f image2 -pattern_type glob -i "$tilepath/*.jpg" \
 		-r 25 -vcodec mpeg4 -b 30000k -vf \
 		-y $mov/setname-$res.mp4
 	done
 }
 
+urlpath=$1
+urlfile=$(basename $urlpath)
+setname="${urlfile%.*}"
+
+resolutions=("1280x960" "1920x1080")
 echo "starting $setname"
 
+initenv			# create basic folder tree 
 initproject		# create folder tree
 gettilesHD		# get tiles from url
 tilemontage		# assemble all tiles in one .miff image
