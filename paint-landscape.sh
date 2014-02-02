@@ -67,17 +67,18 @@ resolutions=("1280x960" "1920x1080" "1136x640")
  
 for urlpath in `find $1 -iname "*.md" -type f`
 do
+	clear
+	
 	urlfile=$(basename $urlpath)
 	setname="${urlfile%.*}"
 	echo "starting $setname"
 	
-    clear
 	initenv			  # create basic folder tree 
 	initproject		# create folder tree
 	gettilesHD		# get tiles from url
 	tilemontage		# assemble all tiles in one .miff image
 	stack			    # create tiles from the .miff image and compile them into a movie
 	
-	mv $urlpath "$setpath/$urlfile"
-	rm "$tmp/*.miff"
+	mv $urlpath "$setpath/$urlfile"  # move url list in current folder
+	rm $tmpmontage                   # delete cache file
 done
