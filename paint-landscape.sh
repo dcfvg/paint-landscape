@@ -63,8 +63,8 @@ function stack {
 	done
 }
 
-resolutions=("1280x960" "1920x1080")
-
+resolutions=("1280x960" "1920x1080" "1136x640")
+ 
 for urlpath in `find $1 -iname "*.md" -type f`
 do
 	urlfile=$(basename $urlpath)
@@ -72,11 +72,12 @@ do
 	echo "starting $setname"
 	
     clear
-	initenv			# create basic folder tree 
+	initenv			  # create basic folder tree 
 	initproject		# create folder tree
 	gettilesHD		# get tiles from url
 	tilemontage		# assemble all tiles in one .miff image
-	stack			# create tiles from the .miff image and compile them into a movie
+	stack			    # create tiles from the .miff image and compile them into a movie
 	
 	mv $urlpath "$setpath/$urlfile"
+	rm "$tmp/*.miff"
 done
