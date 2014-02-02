@@ -74,4 +74,6 @@ do
 	gettilesHD		# get tiles from url
 	tilemontage		# assemble all tiles in one .miff image
 	stack			# create tiles from the .miff image and compile them into a movie
+	
+	mv $urlpath "$setpath/$urlfile"
 done
