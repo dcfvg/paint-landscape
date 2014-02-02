@@ -3,7 +3,7 @@ paint-landscape
 
 never miss a detail
 
-# dependencies
+### dependencies
 
 - wget 
 - graphicsmagick
