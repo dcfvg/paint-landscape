@@ -50,6 +50,7 @@ function stack {
 		
 		echo "tiles @$res"
 		gm convert "$tmp/$setname.miff" -crop $res +adjoin $tilepath/%05d.jpg
+		gm mogrify -background black -extent $res $tilepath/*jpg
 		
 		echo "mov @$res"
 		ffmpeg -f image2 -pattern_type glob -i "$tilepath/*.jpg" \
