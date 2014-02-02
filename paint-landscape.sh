@@ -29,7 +29,7 @@ function gettilesHD {
 	for file in $(cat $urlpath)
 	do	
 		id=`printf %02d $i`
-		wget -nc -O "$raw/$id.jpg" $file
+		wget -c -O "$raw/$id.jpg" $file
 		((i++))
 		
 		x=${file: -5 :1}
