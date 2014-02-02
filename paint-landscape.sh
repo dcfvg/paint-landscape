@@ -6,7 +6,7 @@ then
 	exit 0
 fi
 
-function initenvironement {
+function initenv {
 	assets="assets"
 	url="$assets/url"
 	result="$assets/result"
@@ -29,7 +29,7 @@ function gettilesHD {
 	for file in $(cat $urlpath)
 	do	
 		id=`printf %02d $i`
-		echo "wget -nc -O $id.jpg $file"
+		wget -nc -O "$raw/$id.jpg" $file
 		((i++))
 		
 		x=${file: -5 :1}
@@ -65,6 +65,7 @@ setname="${urlfile%.*}"
 resolutions=("1280x960" "1920x1080")
 echo "starting $setname"
 
+clear
 initenv			# create basic folder tree 
 initproject		# create folder tree
 gettilesHD		# get tiles from url
