@@ -40,7 +40,11 @@ function gettilesHD {
 	printf "tiles: $i \t tilesetsize: $tilesetsize"
 }
 function tilemontage {
-	gm montage -monitor -geometry +0+0 -tile $tilesetsize "$raw/*.jpg" "$tmp/$setname.miff"
+	tmpmontage="$tmp/$setname.miff"	
+	if [ ! -f tmpmontage ]
+	then
+		gm montage -monitor -geometry +0+0 -tile $tilesetsize "$raw/*.jpg" $tmpmontage
+	fi
 }
 function stack {
 	for res in ${resolutions[@]} 
