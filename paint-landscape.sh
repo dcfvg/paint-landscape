@@ -67,10 +67,9 @@ resolutions=("1280x960" "1920x1080")
 
 for urlpath in `find $1 -iname "*.md" -type f`
 do
-	echo "starting $setname"
-
 	urlfile=$(basename $urlpath)
 	setname="${urlfile%.*}"
+	echo "starting $setname"
 	
     clear
 	initenv			# create basic folder tree 
