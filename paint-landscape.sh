@@ -53,13 +53,13 @@ function stack {
 		mkdir $tilepath
 		
 		echo "tiles @$res"
-		gm convert "$tmp/$setname.miff" -crop $res +adjoin $tilepath/%05d.jpg
-		gm mogrify -background black -extent $res $tilepath/*jpg
+		gm convert -background black "$tmp/$setname.miff" -crop $res +adjoin $tilepath/%05d.jpg
+		gm mogrify -background black -extent $res "$tilepath/*jpg"
 		
 		echo "mov @$res"
 		ffmpeg -f image2 -pattern_type glob -i "$tilepath/*.jpg" \
 		-r 25 -vcodec mpeg4 -b 30000k \
-		-y $mov/setname-$res.mp4
+		-y $mov/$setname-$res.mp4
 	done
 }
 
