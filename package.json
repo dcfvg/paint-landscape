@@ -1,8 +1,8 @@
 {
-  "name": "crawler",
+  "name": "paint-landscape",
   "version": "1.0.0",
-  "description": "a sandcrawler test",
-  "main": "app.js",
+  "description": "never miss a detail",
+  "main": "crawler.js",
   "dependencies": {
     "async": "^1.3.0",
     "lodash": "^3.10.0",
@@ -14,7 +14,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node crawler.js && bash paint-landscape.sh crawler-result"
   },
   "author": "",
   "license": "ISC"

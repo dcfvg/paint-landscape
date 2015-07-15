@@ -8,6 +8,10 @@ var fs = require('fs');
 var imageList = [], tilesPagesList = [], tilesList = [];
 var async = require('async');
 var path = require('path');
+var crawlerResultDir = 'crawler-result';
+
+// create crawler result path
+if (!fs.existsSync(crawlerResultDir)) fs.mkdirSync(crawlerResultDir);
 
 // main wikipedia file list
 var filePageList = sandcrawler.spider()
@@ -76,7 +80,7 @@ var getTilesUrl = sandcrawler.spider()
         var projectName = filename.substring(0, filename.length - 6).substring(0, 240);
 
         console.log(curentKey+'/'+tilesList.length, tile);
-        fs.appendFileSync('./wiki/'+projectName+'.md', tile+'\n');
+        fs.appendFileSync('./'+crawlerResultDir+'/'+projectName+'.md', tile+'\n');
 
       })
 

@@ -26,3 +26,6 @@
 *.tmproj
 
 *assets*
+crawler-result
+node_modules
+npm-debug.log
